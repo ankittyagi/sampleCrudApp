@@ -1,0 +1,48 @@
+<div class="container">
+   <h4>Users List</h4>
+   <div>
+      <input type="text" placeholder="Search" class="form-control" (input)="searchUser($event.target.value);">
+   </div>
+   <table class="table">
+      <thead>
+      <tr>
+         <th>ID</th>
+         <th>Name</th>
+         <th>&nbsp;</th>
+      </tr>
+      </thead>
+      <tbody>
+         <tr *ngFor="let user of users">
+         <td>{{ user.id }}</td>
+         <td>{{ user.name }}</td>
+         <td>
+            <button type="button" class="btn btn-primary" (click)="showEditUserForm(user)" >Edit</button>
+            <button type="button" class="btn btn-danger" (click)="removeUser(user)" >Remove</button>
+         </td>
+         </tr>
+      </tbody>
+  </table>
+  <button type="button" class="btn btn-success" (click)="showAddUserForm()"> Add User</button>
+  <form *ngIf="userForm">
+      <h3>Add New User</h3>
+      <div class="form-group" >
+         <label>ID: </label> <input class="form-control" type="text" name="id" [(ngModel)]="newUser.id" />
+      </div>
+      <div class="form-group" >
+         <label>Name: </label><input class="form-control" type="text" name="name" [(ngModel)]="newUser.name" />
+      </div>
+         <button type="button" class="btn btn-primary" (click)="saveUser(newUser)">Submit</button>
+         <button type="button" class="btn btn-warning" (click)="cancelNewUser()">Cancel</button>
+   </form>
+   <form *ngIf="editUserForm">
+      <h3>Edit User Details</h3>
+      <div class="form-group" >
+         <label>ID: </label> <input  class="form-control" type="text" name="id" [(ngModel)]="editedUser.id" />
+      </div>
+      <div class="form-group" >
+         <label>Name: </label> <input  class="form-control" type="text" name="name" [(ngModel)]="editedUser.name" />
+      </div>   
+      <button type="button" class="btn btn-primary" (click)="updateUser(editedUser)">Submit</button>
+      <button type="button" class="btn btn-warning" (click)="cancelEdits()">Cancel</button>
+   </form>
+</div>
