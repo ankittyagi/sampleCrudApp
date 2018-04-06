@@ -7,6 +7,5 @@ import { User } from '../../user/user';
 export class ApiService {
   constructor(private http: HttpClient) { }
   apiUrl = environment.apiUrl;
-
   Users = new Api<User>(this.http, this.apiUrl + 'assets/data.json');
 }

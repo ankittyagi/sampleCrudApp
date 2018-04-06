@@ -4,7 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-interface IApiResponse {
+export interface IApiResponse {
    data: any;
 }
 @Injectable()
@@ -14,7 +14,6 @@ export class Api<T> {
    }
 
    get(): Observable<IApiResponse> {
-      const req = this.http.get<IApiResponse>(`${this.actionUrl}`);
-      return req;
+      return this.http.get<IApiResponse>(`${this.actionUrl}`);
    }
 }
