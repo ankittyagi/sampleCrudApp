@@ -7,7 +7,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
 
-import { UserModule } from './user/user.module';
 import { AboutModule } from './about/about.module';
 import { CoreModule } from './core/core.module';
 import { HomeModule } from './home/home.module';
@@ -18,7 +17,6 @@ import { HomeModule } from './home/home.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    UserModule,
     AboutModule,
     HomeModule,
     CoreModule

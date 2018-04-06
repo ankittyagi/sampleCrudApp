@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from './user.service';
-import {User} from './user';
+import {UserService} from '../user.service';
+import {User} from '../user';
 import {clone} from 'lodash';
 @Component({
   selector: 'app-user',
@@ -10,11 +10,11 @@ import {clone} from 'lodash';
 
 export class UserComponent implements OnInit {
   users: User[];
-  userForm: Boolean = false;
   isNewUser: Boolean;
-  newUser: any = {};
+  newUser: User;
+  editedUser: User;
+  addUserForm: Boolean = false;
   editUserForm: Boolean = false;
-  editedUser: any = {};
   constructor(private userService: UserService) { }
 
   ngOnInit() {
@@ -31,19 +31,19 @@ export class UserComponent implements OnInit {
 
   showEditUserForm(user: User) {
     if (!user) {
-      this.userForm = false;
+      this.addUserForm = false;
       return;
     }
     this.editUserForm = true;
-    this.userForm = false;
+    this.addUserForm = false;
     this.editedUser = clone(user);
   }
 
   showAddUserForm() {
     if (this.users.length) {
-      this.newUser = {};
+      this.newUser = null;
     }
-    this.userForm = true;
+    this.addUserForm = true;
     this.editUserForm = false;
     this.isNewUser = true;
   }
@@ -52,7 +52,7 @@ export class UserComponent implements OnInit {
     if (this.isNewUser) {
       this.addUser(user);
     }
-    this.userForm = false;
+    this.addUserForm = false;
   }
 
   updateUser(editedUser: User) {
@@ -61,7 +61,7 @@ export class UserComponent implements OnInit {
    });
    this.users[index] = editedUser;
     this.editUserForm = false;
-    this.editedUser = {};
+    this.editedUser = null;
   }
 
   removeUser(user: User) {
@@ -69,36 +69,34 @@ export class UserComponent implements OnInit {
   }
 
   cancelEdits() {
-    this.editedUser = {};
+    this.editedUser = null;
     this.editUserForm = false;
   }
 
   cancelNewUser() {
-    this.newUser = {};
-    this.userForm = false;
+    this.newUser = null;
+    this.addUserForm = false;
   }
 
   searchUser(value: string) {
    this.users = this.findUsers(value);
   }
+
   findUsers(value: string) {
       if (value) {
-         const r =  this.users.filter((u: User) => {
+         return this.users.filter((u: User) => {
             return u.name.toLowerCase().indexOf(value) >= 0;
          });
-         return r;
       } else {
          this.getUsers();
       }
    }
 
    addUser(user: User) {
-   this.users.push(user);
+      this.users.push(user);
    }
 
-
-
    deleteUser(user: User) {
-   this.users.splice(this.users.indexOf(user), 1);
+      this.users.splice(this.users.indexOf(user), 1);
    }
 }
