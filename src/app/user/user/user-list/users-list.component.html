@@ -1,0 +1,13 @@
+<table class="table">
+   <ng-content></ng-content>
+   <tbody>
+      <tr *ngFor="let user of users">
+      <td>{{ user.id }}</td>
+      <td>{{ user.name }}</td>
+      <td>
+         <button type="button" class="btn btn-primary" (click)="showEditUser(user)" >Edit</button>
+         <button type="button" class="btn btn-danger" (click)="deleteUser(user)" >Remove</button>
+      </td>
+      </tr>
+   </tbody>
+</table>

@@ -41,7 +41,10 @@ export class UserComponent implements OnInit {
 
   showAddUserForm() {
     if (this.users.length) {
-      this.newUser = null;
+      this.newUser = {
+         id: this.users.length + 1,
+         name: null
+         };
     }
     this.addUserForm = true;
     this.editUserForm = false;
